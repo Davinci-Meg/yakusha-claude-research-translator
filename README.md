@@ -145,4 +145,4 @@ python extract_images.py <pdf_path> <output_dir>
 
 ## ライセンス
 
-MIT
+[GNU Affero General Public License v3.0](LICENSE)
