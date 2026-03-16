@@ -1,4 +1,4 @@
-# paper-en2ja-translator
+# paper-translator-en2ja
 
 **Claude Code skill** — 英語論文（PDF）を日本語に翻訳・要約し、図版付きで出力する。
 
@@ -29,7 +29,7 @@
 ### 1. このリポジトリをクローン
 
 ```bash
-git clone https://github.com/Davinci-Meg/paper-en2ja-translator.git
+git clone https://github.com/Davinci-Meg/paper-translator-en2ja.git
 ```
 
 ### 2. Claude Code のスキルとして登録
@@ -92,7 +92,7 @@ Claude Code を起動して `/paper-translate` を実行：
 ## ファイル構成
 
 ```
-paper-en2ja-translator/
+paper-translator-en2ja/
 ├── SKILL.md    — Claude Code スキル定義（メインロジック）
 └── README.md   — このファイル
 ```
