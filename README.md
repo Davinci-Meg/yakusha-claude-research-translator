@@ -1,4 +1,4 @@
-# Yakusha: claude-research-translator
+# paper-en2ja-translator
 
 **Claude Code skill** — 英語論文（PDF）を日本語に翻訳・要約し、図版付きで出力する。
 
@@ -14,13 +14,11 @@
 
 ```
 <PDFと同じディレクトリ>/<論文タイトル>/
-├── images/                 — 論文内の図を抽出した画像ファイル
-│   ├── page01_01.png
-│   └── ...
-├── paper.md                — 原文の Markdown 変換（英語・図版付き）
-├── paper.ja.md             — 日本語翻訳（図版付き）
+├── images/                 — PDFから抽出した図表画像
+├── paper.md                — 原文の Markdown 変換（英語・画像埋め込み）
+├── paper.ja.md             — 日本語翻訳（本文のみ翻訳、見出しは英語保持・画像埋め込み）
 ├── paper.summary.ja.md     — 日本語の構造化サマリー
-├── paper.ja.pdf            — 日本語翻訳の PDF 版
+├── paper.ja.pdf            — 日本語翻訳の PDF 版（画像・CJK改行対応）
 └── paper.summary.ja.pdf    — 日本語サマリーの PDF 版
 ```
 
@@ -31,7 +29,7 @@
 ### 1. このリポジトリをクローン
 
 ```bash
-git clone https://github.com/<your-name>/paper-translate.git
+git clone https://github.com/Davinci-Meg/paper-en2ja-translator.git
 ```
 
 ### 2. Claude Code のスキルとして登録
@@ -42,12 +40,10 @@ git clone https://github.com/<your-name>/paper-translate.git
 # macOS / Linux
 mkdir -p ~/.claude/commands/paper-translate
 cp SKILL.md ~/.claude/commands/paper-translate/SKILL.md
-cp extract_images.py ~/.claude/commands/paper-translate/extract_images.py
 
 # Windows (PowerShell)
 New-Item -ItemType Directory -Force "$env:USERPROFILE\.claude\commands\paper-translate"
 Copy-Item SKILL.md "$env:USERPROFILE\.claude\commands\paper-translate\SKILL.md"
-Copy-Item extract_images.py "$env:USERPROFILE\.claude\commands\paper-translate\extract_images.py"
 ```
 
 ### 3. 依存関係のインストール
@@ -61,10 +57,10 @@ pip install pymupdf
 **PDF 変換エンジン（PDF 出力に必要）**
 
 - [pandoc](https://pandoc.org/installing.html) をインストール
-- xelatex を含む TeX ディストリビューションをインストール
+- lualatex を含む TeX ディストリビューションをインストール
   - Windows: [MiKTeX](https://miktex.org/)
   - macOS: `brew install --cask mactex`
-  - Linux: `sudo apt install texlive-xetex texlive-lang-japanese`
+  - Linux: `sudo apt install texlive-luatex texlive-lang-japanese`
 
 ---
 
@@ -88,7 +84,7 @@ Claude Code を起動して `/paper-translate` を実行：
 | Python | 3.10 以上 |
 | pymupdf | 1.23 以上 |
 | pandoc | 2.x 以上 |
-| TeX エンジン | xelatex または lualatex |
+| TeX エンジン | lualatex（推奨）または xelatex |
 | 日本語フォント | Yu Gothic (Win) / Hiragino (mac) / Noto CJK (Linux) |
 
 ---
@@ -96,23 +92,14 @@ Claude Code を起動して `/paper-translate` を実行：
 ## ファイル構成
 
 ```
-paper-translate/
-├── SKILL.md            — Claude Code スキル定義（メインロジック）
-├── extract_images.py   — PDF からの画像抽出スクリプト
-└── README.md           — このファイル
+paper-en2ja-translator/
+├── SKILL.md    — Claude Code スキル定義（メインロジック）
+└── README.md   — このファイル
 ```
 
 ### SKILL.md
 
-Claude Code のカスタムスキルとして動作するプロンプト定義。`/paper-translate` コマンドで呼び出されると、Step 0〜6 を順番に実行する。
-
-### extract_images.py
-
-pymupdf を使って PDF から図版を抽出し、Markdown の `Figure N` 参照箇所に `![Figure N: caption](images/...)` を自動挿入するスクリプト。SKILL.md から呼び出される。
-
-```bash
-python extract_images.py <pdf_path> <output_dir>
-```
+Claude Code のカスタムスキルとして動作するプロンプト定義。`/paper-translate` コマンドで呼び出されると、Step 0〜6 を順番に実行する。画像抽出は pymupdf を使ってインラインで実行される。
 
 ---
 
@@ -127,7 +114,7 @@ python extract_images.py <pdf_path> <output_dir>
 
 ヒューマン・コンピュータ・インタラクション（HCI）研究者たちは...
 
-![Figure 1: Nukadoko fermentation involving human, veg-](images/page01_02.png)
+![Figure 1: Nukadoko fermentation involving human, veg-](images/figure_1.jpeg)
 ```
 
 **paper.summary.ja.md**
