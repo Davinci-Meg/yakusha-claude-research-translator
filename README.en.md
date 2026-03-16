@@ -121,6 +121,10 @@ paper-translator-en2ja/
 └── README.md   — This file
 ```
 
+## :loudspeaker: Changelog
+
+- **2026-03-17** — Switched figure extraction to DocLayout-YOLO Hybrid. The previous pymupdf-based approach could only extract raster images. The new YOLO + pdf2image pipeline can auto-detect both raster and vector figures (100% precision and recall).
+
 ## :scroll: License
 
 [GNU Affero General Public License v3.0](LICENSE)

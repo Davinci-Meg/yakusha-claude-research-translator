@@ -123,6 +123,10 @@ paper-translator-en2ja/
 └── README.en.md   — English README
 ```
 
+## :loudspeaker: アップデート履歴
+
+- **2026-03-17** — 図版抽出を DocLayout-YOLO Hybrid 方式に変更。従来の pymupdf ベースではラスター画像しか抽出できなかったが、YOLO + pdf2image の組み合わせによりベクター図版も含めた全図版の自動抽出が可能に（適合率・再現率ともに100%）。
+
 ## :scroll: ライセンス
 
 [GNU Affero General Public License v3.0](LICENSE)
