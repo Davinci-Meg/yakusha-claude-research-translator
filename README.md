@@ -106,7 +106,7 @@ Claude Code を起動して `/paper-translate` を実行：
 ## :building_construction: 処理フロー
 
 1. **Step 0** — PDFファイルの特定と出力フォルダの作成
-2. **Step 1** — PDFから図版を抽出 (`DocLayout-YOLO Hybrid`)
+2. **Step 1** — PDFから図版を抽出 (`DocLayout-YOLO`)
 3. **Step 2** — PDFをセクション構造付きMarkdownに変換
 4. **Step 3** — 日本語に翻訳（見出しは英語保持）
 5. **Step 4** — 構造化サマリーを生成
@@ -125,7 +125,7 @@ paper-translator-en2ja/
 
 ## :loudspeaker: アップデート履歴
 
-- **2026-03-17** — 図版抽出を DocLayout-YOLO Hybrid 方式に変更。従来の pymupdf ベースではラスター画像しか抽出できなかったが、YOLO + pdf2image の組み合わせによりベクター図版も含めた全図版の自動抽出が可能に（適合率・再現率ともに100%）。さらに Claude Code が論文の文脈を理解した上で、Figure番号の対応付け・検出漏れの補完・意味的な検証を行うことで、高精度な図版抽出を実現。
+- **2026-03-17** — 図版抽出を DocLayout-YOLO ベースの検出方式に変更。従来の pymupdf ベースではラスター画像しか抽出できなかったが、YOLO + pdf2image の組み合わせによりベクター図版も含めた全図版の自動抽出が可能に（適合率・再現率ともに100%）。さらに Claude Code が論文の文脈を理解した上で、Figure番号の対応付け・検出漏れの補完・意味的な検証を行うことで、高精度な図版抽出を実現。
 
 ## :scroll: ライセンス
 

@@ -105,7 +105,7 @@ Launch Claude Code and run `/paper-translate`:
 ## :building_construction: How It Works
 
 1. **Step 0** — Identify PDF files and create output folder
-2. **Step 1** — Extract figures from PDF (`DocLayout-YOLO Hybrid`)
+2. **Step 1** — Extract figures from PDF (`DocLayout-YOLO`)
 3. **Step 2** — Convert PDF to Markdown with section structure
 4. **Step 3** — Translate to Japanese (keep headings in English)
 5. **Step 4** — Generate structured summary
@@ -123,7 +123,7 @@ paper-translator-en2ja/
 
 ## :loudspeaker: Changelog
 
-- **2026-03-17** — Switched figure extraction to DocLayout-YOLO Hybrid. The previous pymupdf-based approach could only extract raster images. The new YOLO + pdf2image pipeline can auto-detect both raster and vector figures (100% precision and recall). Claude Code then leverages paper context to match Figure numbers, verify detections, and fill in any gaps — combining automated detection with semantic understanding.
+- **2026-03-17** — Switched figure extraction to DocLayout-YOLO-based detection. The previous pymupdf-based approach could only extract raster images. The new YOLO + pdf2image pipeline can auto-detect both raster and vector figures (100% precision and recall). Claude Code then leverages paper context to match Figure numbers, verify detections, and fill in any gaps — combining automated detection with semantic understanding.
 
 ## :scroll: License
 
